@@ -102,7 +102,7 @@ typora-copy-images-to: ../images/2021-11-30
 
 
 
-1. `konlpy`: 한글 형태소 분석기
+`konlpy`: 한글 형태소 분석기
 
   - [공식문서](https://konlpy.org/ko/latest/)
 
@@ -110,7 +110,7 @@ typora-copy-images-to: ../images/2021-11-30
 
 
 
-2. `pororo`: 카카오브레인에서 만든 한글 자연어처리 라이브러리
+`pororo`: 카카오브레인에서 만든 한글 자연어처리 라이브러리
 
   - [Github 주소](https://github.com/kakaobrain/pororo)
 
@@ -164,78 +164,7 @@ ext_summ = Pororo(task="text_summarization", lang="ko", model="extractive")
 abs_summ = Pororo(task="text_summarization", lang="ko", model="abstractive")
 ```
 
-<pre>
 
-
-</pre>
-<pre>
-Downloading:   0%|          | 0.00/226k [00:00<?, ?B/s]
-</pre>
-<pre>
-Downloading:   0%|          | 0.00/28.0 [00:00<?, ?B/s]
-</pre>
-<pre>
-Downloading:   0%|          | 0.00/455k [00:00<?, ?B/s]
-</pre>
-<pre>
-Downloading:   0%|          | 0.00/570 [00:00<?, ?B/s]
-</pre>
-<pre>
-Downloading: "https://github.com/facebookresearch/detr/archive/master.zip" to /root/.cache/torch/hub/master.zip
-Downloading: "https://download.pytorch.org/models/resnet50-19c8e357.pth" to /root/.cache/torch/hub/checkpoints/resnet50-19c8e357.pth
-</pre>
-<pre>
-  0%|          | 0.00/97.8M [00:00<?, ?B/s]
-</pre>
-<pre>
-Downloading: "https://dl.fbaipublicfiles.com/detr/detr-r50-e632da11.pth" to /root/.cache/torch/hub/checkpoints/detr-r50-e632da11.pth
-</pre>
-<pre>
-  0%|          | 0.00/159M [00:00<?, ?B/s]
-</pre>
-<pre>
-
-
-
-
-
-
-
-</pre>
-<pre>
-As of now, this beta model tries to correct spacing errors in Korean text.
-</pre>
-<pre>
-
-
-
-</pre>
-<pre>
-Downloading:   0%|          | 0.00/1.08k [00:00<?, ?B/s]
-</pre>
-<pre>
-Downloading:   0%|          | 0.00/2.00 [00:00<?, ?B/s]
-</pre>
-<pre>
-Downloading:   0%|          | 0.00/85.0 [00:00<?, ?B/s]
-</pre>
-<pre>
-Downloading:   0%|          | 0.00/109 [00:00<?, ?B/s]
-</pre>
-<pre>
-Downloading:   0%|          | 0.00/666k [00:00<?, ?B/s]
-</pre>
-<pre>
-The tokenizer class you load from this checkpoint is not the same type as the class this function is called from. It may result in unexpected tokenization. 
-The tokenizer class you load from this checkpoint is 'BartTokenizer'. 
-The class this function is called from is 'PreTrainedTokenizerFast'.
-
-
-
-The tokenizer class you load from this checkpoint is not the same type as the class this function is called from. It may result in unexpected tokenization. 
-The tokenizer class you load from this checkpoint is 'BartTokenizer'. 
-The class this function is called from is 'PreTrainedTokenizerFast'.
-</pre>
 ## 형태소 분석기 `konlpy` 예제
 
 
@@ -380,11 +309,6 @@ for line in output_text1.split('.'):
     print(line)
 ```
 
-<pre>
-[nltk_data] Downloading package punkt to /root/nltk_data...
-[nltk_data]   Unzipping tokenizers/punkt.zip.
-[Korean Sentence Splitter]: Initializing Pynori...
-</pre>
 <pre>
 2004년 SM에서 주최한 청소년 베스트 선발 대회에서 노래짱 대상을 수상하며 SM 엔터테인먼트에 캐스팅되었다
  이후 태연은 2004년 8월에 열린 제8회 SM 청소년 베스트 선발 대회에서 노래짱 부문에 출전해 1위(대상)를 수상하였고 SM 엔터테인먼트에 정식 캐스팅되어 연습생 생활을 시작하게 되었다
@@ -628,11 +552,10 @@ from IPython.display import Image
 ```python
 url = 'https://i.pinimg.com/originals/b9/de/80/b9de803706fb2f7365e06e688b7cc470.jpg'
 Image(url, width=750)
+
 ```
 
-<pre>
-<IPython.core.display.Image object>
-</pre>
+이미지 캡션 출력
 
 ```python
 caption(url)
