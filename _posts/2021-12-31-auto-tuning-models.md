@@ -35,6 +35,10 @@ typora-copy-images-to: ../images/2021-12-31
 
 
 
+[Google Colab 예제]https://colab.research.google.com/drive/1vKBrzrztNmzM_DXh5Ye3WKwL0AGGQFmC?usp=sharing
+
+
+
 <head>
   <style>
     table.dataframe {
@@ -622,6 +626,8 @@ params, preds = catboostoptuna.optimize(iris_df.drop('target', 1),
                                         test_data=iris_df.drop('target', 1),
                                         seed=321,
                                         eval_metric='recall', n_trials=3)
+
+(np.squeeze(preds) == iris_df['target']).mean()
 ```
 
 ### 다중분류(multi-class classification)
