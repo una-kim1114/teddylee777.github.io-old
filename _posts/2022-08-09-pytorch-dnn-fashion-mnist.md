@@ -17,12 +17,6 @@ PyTorch 심층신경망(Deep Neural Network) 모델을 생성하고 PyTorch의 �
 최대한 주석을 꼼꼼히 달아 놓았습니다. 처음 PyTorch를 활용하여 신경망 모델을 생성해 보시는 분들은 주석을 꼼꼼히 참고해 주시기 바랍니다.
 
 
-`torchvision`의 `Image Transform` 에 대하여 생소하다면 **다음의 링크를 참고**해 주시기 바랍니다.
-
-- [torchvision의 transform으로 이미지 정규화하기(평균, 표준편차를 계산하여 적용](https://teddylee777.github.io/pytorch/torchvision-transform)
-- [PyTorch 이미지 데이터셋(Image Dataset) 구성에 관한 거의 모든 것!](https://teddylee777.github.io/pytorch/dataset-dataloader)
-
-
 
 <head>
   <style>
@@ -582,9 +576,7 @@ epoch 20, loss: 0.15411, acc: 0.94178, val_loss: 0.36963, val_accuracy: 0.89350
 model.load_state_dict(torch.load('DNNModel.pth'))
 ```
 
-<pre>
-<All keys matched successfully>
-</pre>
+
 
 ```python
 # 최종 검증 손실(validation loss)와 검증 정확도(validation accuracy)를 산출합니다.
