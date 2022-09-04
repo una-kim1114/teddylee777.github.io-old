@@ -131,17 +131,8 @@ test_transform = transforms.Compose([
 train_loader, test_loader = sd.cats_and_dogs(train_transform, test_transform)
 ```
 
+
 <pre>
-Truncated Image is found at: tmp/PetImages/Dog/Thumbs.db
-</pre>
-<pre>
-/opt/conda/envs/py37/lib/python3.7/site-packages/PIL/TiffImagePlugin.py:845: UserWarning: Truncated File Read
-  warnings.warn(str(msg))
-</pre>
-<pre>
-Truncated Image is found at: tmp/PetImages/Dog/11702.jpg
-Truncated Image is found at: tmp/PetImages/Cat/Thumbs.db
-Truncated Image is found at: tmp/PetImages/Cat/666.jpg
 ['tmp/PetImages/Dog', 'tmp/PetImages/Cat']
 ==============================
 train images: 20000
@@ -505,10 +496,6 @@ epoch 10, loss: 0.14265, acc: 0.94105, val_loss: 0.23530, val_accuracy: 0.90796
 # 모델에 저장한 가중치를 로드합니다.
 model.load_state_dict(torch.load(f'{MODEL_NAME}.pth'))
 ```
-
-<pre>
-<All keys matched successfully>
-</pre>
 
 ```python
 # 최종 검증 손실(validation loss)와 검증 정확도(validation accuracy)를 산출합니다.
