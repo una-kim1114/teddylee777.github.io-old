@@ -8,10 +8,10 @@ tags: [python, 파이썬, pytorch, image transform, image augmentation, 이미�
 comments: true
 published: true
 typora-copy-images-to: ../images/2023-01-02
-
 ---
 
 PyTorch의 변환기(Transform)를 활용하여 이미지 데이터셋 증강을 적용하는 방법에 대해 알아보겠습니다.
+
 
 <head>
   <style>
