@@ -277,7 +277,7 @@ def create_loader(transform):
 
 ## 변형(Transform) 적용
 
-
+-  [공식도큐먼트 링크](https://pytorch.org/vision/stable/transforms.html)
 
 `ColorJitter`
 
