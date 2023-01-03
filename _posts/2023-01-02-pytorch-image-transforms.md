@@ -279,12 +279,16 @@ def create_loader(transform):
 
 -  [공식도큐먼트 링크](https://pytorch.org/vision/stable/transforms.html)
 
+
+
+### 밝기, 대비, 채도, 색상 조절
+
 `ColorJitter`
 
 - `brightness`: 밝기 조절 (0~1)
 - `contrast`: 대비 조절 (0~1)
 - `saturation`: 채도 조절 (0~1)
-- `hue`: 휴 조절 (-0.5~0.5)
+- `hue`: 색상 조절 (-0.5~0.5)
 
 ```python
 image_transform = transforms.Compose([
@@ -305,7 +309,10 @@ create_loader(image_transform)
 
 
 
+### 랜덤 수평 반전
+
 `RandomHorizontalFlip(p=0.5)`
+
 - Horizontal Flip의 확률을 조절합니다. 
 
 ```python
@@ -321,7 +328,12 @@ create_loader(image_transform)
 
 ![05](../images/2023-01-02/05.png)
 
+
+
+### 가우시안 블러
+
 `GaussianBlur(kernel_size, sigma=(0.1, 2.0))`
+
 - `kernel_size`: 가우시안 커널의 크기
 - `sigma`: 커널의 Standard Deviation
 
@@ -340,7 +352,92 @@ create_loader(image_transform)
 
 
 
+### 랜덤 회전
+
+`RandomRotation(degrees, interpolation=InterpolationMode.NEAREST, expand=False, center=None, fill=0)`
+
+- `degrees`: 로테이션에 적용할 각도 (min, max)
+- `interpolation`: 기본 값(`InterpolationMode.NEAREST`). `InterpolationMode.BILINEAR` 추가 적용 가능
+- `fill`: 기본 값(0). 픽셀 값으로 채울 값 지정.
+
+```python
+image_transform = transforms.Compose([
+    transforms.Resize((256, 256)),              
+    # RandomRotation 적용
+    transforms.RandomRotation(degrees=(-30, 30), interpolation=transforms.InterpolationMode.BILINEAR, fill=0),
+    transforms.ToTensor()
+])
+
+create_loader(image_transform)
+```
+
+![08](../images/2023-01-02/08.png)
 
 
 
+### 패딩값 추가
 
+`Pad(padding, fill=0, padding_mode='constant')`
+
+- `padding`: 단일 값으로 지정시 left, right, top, bottom에 동일하게 패딩 적용. 2개 지정시 left/right, top/bottom 순차 적용. 4개 적용시 left, top, right, bottom 순서대로 적용
+- `fill`: 단일 값으로 지정시 해당 값으로 픽셀 값으로 채움. tuple 형태로 3개 지정시 RGB 채널에 순차 적용.
+- `padding_mode`: 기본 값은 `constant`. `edge`, `reflect`, `symmetric`으로 변경 가능
+
+```python
+image_transform = transforms.Compose([
+    transforms.Resize((256, 256)),              
+    # Pad 적용
+    transforms.Pad(padding=(100, 50, 100, 200), fill=255, padding_mode='symmetric'),
+    transforms.ToTensor()
+])
+
+create_loader(image_transform)
+```
+
+![09](../images/2023-01-02/09.png)
+
+
+
+`RandomAdjustSharpness(sharpness_factor, p=0.5)`
+- `sharpness_factor`: 선명도를 얼마나 조절할 것인가. 0은 흐릿한 이미지를 제공하고 1은 원본 이미지를 제공하는 반면 2는 선명도를 2배 증가시킵니다.
+- `p`: 선명도(sharpness) 적용 확률
+
+주어진 확률로 이미지의 선명도를 임의로 조정합니다. 이미지가 토치 텐서인 경우, […, 1 또는 3, H, W] 모양을 가질 것으로 예상되며, 여기서 ...는 임의의 수의 선행 차원을 의미합니다.
+
+```python
+image_transform = transforms.Compose([
+    transforms.Resize((256, 256)),              
+    # RandomAdjustSharpness 적용
+    transforms.RandomAdjustSharpness(sharpness_factor=0.1, p=0.9),
+    transforms.ToTensor()
+])
+
+create_loader(image_transform)
+```
+
+![10](../images/2023-01-02/10.png)
+
+
+
+### 자동 증강 정책
+
+**데이터로부터 학습 증강 전략**에 기반한 자동증강 데이터 증강 방법. 
+
+`AutoAugment(policy: AutoAugmentPolicy = AutoAugmentPolicy.IMAGENET, interpolation: InterpolationMode = InterpolationMode.NEAREST, fill: Optional[List[float]] = None)`
+
+- `policy`: torchvision.transforms에 의해 정의된 정책 중 1개 지정. 기본값은 `transforms.autoaugment.AutoAugmentPolicy.IMAGENET`입니다. 
+- `interpolation`: torchvision.transforms에 의해 정의된 원하는 보간 모드. 기본 값(`InterpolationMode.NEAREST`). `InterpolationMode.BILINEAR` 추가 적용 가능. 
+- `fill`: 변환된 이미지 외부 영역의 픽셀 채우기 값.
+
+```python
+image_transform = transforms.Compose([
+    transforms.Resize((256, 256)),              
+    # AutoAugment 적용
+    transforms.AutoAugment(policy=transforms.autoaugment.AutoAugmentPolicy.IMAGENET, interpolation=transforms.InterpolationMode.BILINEAR),
+    transforms.ToTensor()
+])
+
+create_loader(image_transform)
+```
+
+![11](../images/2023-01-02/11.png)
