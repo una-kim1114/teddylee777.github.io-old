@@ -38,19 +38,13 @@ STEP 2 ~ STEP 4의 내용은 설정과정을 글로 풀어내기 다소 어려�
 
 **64-Bit Graphical Installer**를 인스톨하시면 됩니다.
 
-## 
-
-## STEP 2 ~ STEP 4. 아래 YouTube 영상을 참고하여 진행해 주세요!
 
 
-
-<br>
+## 아래 YouTube 영상을 참고하여 진행해 주세요!
 
 <br>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Sotje18bINY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-<br>
 
 <br>
 
@@ -73,25 +67,5 @@ STEP 2 ~ STEP 4의 내용은 설정과정을 글로 풀어내기 다소 어려�
    
 
 2. [**PyCharm 설치 다운로드 링크**](https://www.jetbrains.com/ko-kr/pycharm/download/)
-
-
-
-## 구글 텐서플로 자격 인증 시험 강의
-
-끝으로, 제가 직접 제작한 구글 텐서플로 자격 인증 시험 대비 강의 링크를 공유합니다.
-
-입문자 분들을 대상으로 쉽게 풀어낸 강의입니다. 이미 어느정도 텐서플로를 다룰 줄 아시는 분들은 수강하실 필요 없습니다.
-
-강의를 수강하시는 분들은 비공개 슬랙 채널로 초대장을 발송해 드립니다. 슬랙 채널에서 시험 관련 질문을 주시면 1:1 피드백을 드리고 있습니다.
-
-- [인프런](https://www.inflearn.com/course/%ED%85%90%EC%84%9C%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%9E%90%EA%B2%A9%EC%A6%9D)
-- [런어데이](https://learnaday.kr/open-course/tfcert)
-
-
-
-**감사합니다! 모두 합격 하세요!**
-
-
-
 
 
