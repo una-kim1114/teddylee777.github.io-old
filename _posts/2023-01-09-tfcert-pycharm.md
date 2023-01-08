@@ -12,18 +12,18 @@ typora-copy-images-to: ../images/2023-01-09
 
 본 포스팅은 **Google TensorFlow Developers Certificate** 자격인증 시험을 위한 환경설치를 위한 내용입니다.
 
+2020년도에 작성한 [**텐서플로우 개발자 자격증 (Tensorflow Developer Certification) 시험 그리고 취득방법**](https://teddylee777.github.io/thoughts/tensorflow-2-certification) 글에서 구글 텐서플로 자격 인증 시험에 대하여 응시 전 준비사항, PyCharm 셋팅, 플러그인 설정 방법을 다뤘습니다.
 
+2년 사이에 PyCharm과 설치할 라이브러리 등이 업데이트 되면서, 기존에 공유 드렸던 내용과 맞지 않아 문의가 많아 **2023년 버전으로 새롭게 업데이트**하게 되었습니다👏👏
 
-주요 내용은 다음과 같습니다.
+<u>**주요 내용**</u>은 다음과 같습니다.
 
-- STEP 1: 아나콘다(Anaconda) 가상환경 설치
-- STEP 2: PyCharm 설치
-- STEP 3: 가상환경 생성 후 필요한 라이브러리 설치
-- STEP 4: PyCharm에 설치한 가상환경 적용
+- <u>STEP 1</u>: 아나콘다(Anaconda) 가상환경 설치
+- <u>STEP 2</u>: PyCharm 설치
+- <u>STEP 3</u>: 가상환경 생성 후 필요한 라이브러리 설치
+- <u>STEP 4</u>: PyCharm에 설치한 가상환경 적용
 
-
-
-STEP 2 ~ STEP 4의 내용은 설정과정을 글로 풀어내기 다소 어려운 점이 있어 유튜브 영상과 같이 참고하여 진행해 주시면 됩니다.
+STEP 2 ~ STEP 4의 내용은 설정과정을 글로 풀어내기 다소 어려운 점이 있어 **유튜브 영상**과 같이 참고하여 진행해 주시면 됩니다.
 
 
 
