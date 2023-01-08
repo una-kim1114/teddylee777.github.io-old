@@ -38,7 +38,7 @@ typora-copy-images-to: ../images/2023-01-08
 
 위의 그림대로 Inception Module을 구현한 코드는 아래와 같습니다.
 
-```Python
+```python
 import torch
 import torch.nn as nn
 import torchsummary
@@ -155,11 +155,8 @@ Estimated Total Size (MB): 7.82
 
 ## Inception Module with dimension reductions 구현
 
-class InceptionModuleV2(nn.Module):
-    def __init__(self, in_channels, out_1x1, out_3x3_reduce, out_3x3, out_5x5_reduce, out_5x5, pool):
-        super(InceptionModuleV2, self).__init__()
-        self.conv1x1 = BaseConv2D(in_channels, out_1x1, kernel_size=1)
-        
+
+
 
 ```python
 class InceptionModuleV2(nn.Module):
