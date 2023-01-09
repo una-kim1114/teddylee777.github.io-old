@@ -435,7 +435,7 @@ test_data = TokenDataset(test, tokenizer_pretrained)
 
 ## Model
 
-
+device 를 지정합니다 (`'cuda'` or `'cpu'`).
 
 ```python
 import torch
@@ -448,6 +448,10 @@ print(device)
 <pre>
 cuda:1
 </pre>
+
+
+`TrainingArguments` 에 학습에 적용할 몇 가지 옵션을 다음과 같이 지정합니다. 세부 옵션에 대한 내용은 주석으로 달아 놓았습니다.
+
 
 ```python
 from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
@@ -467,8 +471,16 @@ training_args = TrainingArguments(
 ```
 
 
+
+사전 학습 모델을 지정합니다. 아래의 예제에서는 `'distilbert-base-uncased'` 모델을 가져왔습니다.
+
+원하는 모델은 [Hugging Face Models](https://huggingface.co/models) 에서 검색해 볼 수 있습니다. 왼쪽에 필터링 조건에 한국어, 라이브러리(PyTorch/TensorFlow) 등을 지정할 수 있습니다. 한국어 텍스트 분류기를 위한 사전 학습 모델은 검색어에 `kor`을 입력해 보시기 바랍니다.
+
+사전 학습 모델을 다운로드 받은 후 `Trainer`를 활용하여 학습을 손쉽게 진행합니다.
+
+
 ```python
-# pretrained 모델 지정
+# pre-trained 모델 지정
 model_pretrained = 'distilbert-base-uncased'
 
 # 모델 다운로드, num_labels 지정, device 지정
@@ -502,6 +514,10 @@ Training completed. Do not forget to share your model on huggingface.co/models =
 TrainOutput(global_step=1878, training_loss=0.1813284194253631, metrics={'train_runtime': 445.8676, 'train_samples_per_second': 134.778, 'train_steps_per_second': 4.212, 'total_flos': 7960363387435008.0, 'train_loss': 0.1813284194253631, 'epoch': 3.0})
 </pre>
 
+
+
+학습이 완료된 후 `trainer`의 `predict()` 함수에 `test_data` 를 전달하여 inference 를 수행합니다.
+
 ```python
 # 학습된 trainer로 예측
 predictions = trainer.predict(test_data)
@@ -525,6 +541,10 @@ PredictionOutput(predictions=array([[ 2.9732733, -2.9471958],
        [ 4.025952 , -3.6779523]], dtype=float32), label_ids=array([0, 1, 0, ..., 0, 0, 0]), metrics={'test_loss': 0.3030776381492615, 'test_runtime': 13.6168, 'test_samples_per_second': 490.424, 'test_steps_per_second': 3.892})
 </pre>
 
+
+예측된 결과는 `label_ids` 에 담겨 있습니다.
+
+
 ```python
 # 예측 결과는 label_ids 에 담겨 있음
 predictions.label_ids
@@ -533,6 +553,10 @@ predictions.label_ids
 <pre>
 array([0, 1, 0, ..., 0, 0, 0])
 </pre>
+
+
+정확도 평가를 수행합니다. `test['label']` 값과 비교하면 정확도가 산출됩니다.
+
 
 ```python
 # 평가
