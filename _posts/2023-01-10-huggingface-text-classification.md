@@ -486,59 +486,6 @@ trainer = Trainer(
 trainer.train()
 ```
 
-    <div>
-      
-      <progress value='1878' max='1878' style='width:300px; height:20px; vertical-align: middle;'></progress>
-      [1878/1878 07:18, Epoch 3/3]
-    </div>
-    <table border="1" class="dataframe">
-  <thead>
- <tr style="text-align: left;">
-      <th>Step</th>
-      <th>Training Loss</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200</td>
-      <td>0.512700</td>
-    </tr>
-    <tr>
-      <td>400</td>
-      <td>0.287100</td>
-    </tr>
-    <tr>
-      <td>600</td>
-      <td>0.267800</td>
-    </tr>
-    <tr>
-      <td>800</td>
-      <td>0.161400</td>
-    </tr>
-    <tr>
-      <td>1000</td>
-      <td>0.147000</td>
-    </tr>
-    <tr>
-      <td>1200</td>
-      <td>0.148200</td>
-    </tr>
-    <tr>
-      <td>1400</td>
-      <td>0.067900</td>
-    </tr>
-    <tr>
-      <td>1600</td>
-      <td>0.047200</td>
-    </tr>
-    <tr>
-      <td>1800</td>
-      <td>0.044900</td>
-    </tr>
-  </tbody>
-</table><p>
-
-
 <pre>
 Saving model checkpoint to ./results/checkpoint-500
 Configuration saved in ./results/checkpoint-500/config.json
@@ -550,12 +497,8 @@ Saving model checkpoint to ./results/checkpoint-1500
 Configuration saved in ./results/checkpoint-1500/config.json
 Model weights saved in ./results/checkpoint-1500/pytorch_model.bin
 
-
 Training completed. Do not forget to share your model on huggingface.co/models =)
 
-
-</pre>
-<pre>
 TrainOutput(global_step=1878, training_loss=0.1813284194253631, metrics={'train_runtime': 445.8676, 'train_samples_per_second': 134.778, 'train_steps_per_second': 4.212, 'total_flos': 7960363387435008.0, 'train_loss': 0.1813284194253631, 'epoch': 3.0})
 </pre>
 
