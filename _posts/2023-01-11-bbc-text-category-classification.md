@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "`bbc-text.csv` 데이터셋을 활용한 BBC 뉴스 아티클 카테고리 분류기 만들기"
+title: "bbc-text.csv 데이터셋을 활용한 BBC 뉴스 아티클 카테고리 분류기 만들기"
 description: "`bbc-text.csv` 데이터셋을 활용한 BBC 뉴스 아티클 카테고리 분류기 만들기에 대해 알아보겠습니다."
 headline: "`bbc-text.csv` 데이터셋을 활용한 BBC 뉴스 아티클 카테고리 분류기 만들기에 대해 알아보겠습니다."
 categories: tensorflow
@@ -136,9 +136,8 @@ url = 'https://storage.googleapis.com/download.tensorflow.org/data/bbc-text.csv'
 urllib.request.urlretrieve(url, 'bbc-text.csv')
 ```
 
-<pre>
-('bbc-text.csv', <http.client.HTTPMessage at 0x7fef945410d0>)
-</pre>
+
+
 다운로드 받은 `bbc-text.csv` 파일을 읽어서 df 변수에 로드 합니다.
 
 
@@ -648,9 +647,8 @@ Epoch 00030: val_loss did not improve from 0.43606
 model.load_weights(checkpoint_path)
 ```
 
-<pre>
-<tensorflow.python.training.tracking.util.CheckpointLoadStatus at 0x7fee903eb0d0>
-</pre>
+
+
 `validation_padded`와 `validation_labels`로 최종 성능평가를 수행합니다.
 
 
