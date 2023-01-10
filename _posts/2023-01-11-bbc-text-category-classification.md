@@ -20,6 +20,22 @@ BBC 뉴스 아티클 묶음 데이터셋인 `bbc-text.csv` 파일을 활용하�
 
 
 
+**Dataset Reference**
+
+```
+About this file
+
+Source data from public data set on BBC news articles:
+D. Greene and P. Cunningham. "Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering", Proc. ICML 2006. [PDF] [BibTeX].
+
+http://mlg.ucd.ie/datasets/bbc.html
+
+Cleaned up version exported to https://storage.googleapis.com/dataset-uploader/bbc/bbc-text.csv
+```
+
+
+
+
 <head>
   <style>
     table.dataframe {
