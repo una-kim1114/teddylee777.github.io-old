@@ -3,7 +3,7 @@ layout: page
 title: "실리콘(M1, M2) 맥(Mac) OS 에서 텐서플로(TensorFlow) 설치 방법"
 description: "실리콘(M1, M2) 맥(Mac) OS 에서 텐서플로(TensorFlow) 설치 방법에 대하여 알아보겠습니다."
 headline: "실리콘(M1, M2) 맥(Mac) OS 에서 텐서플로(TensorFlow) 설치 방법에 대하여 알아보겠습니다."
-categories: TensorFlow
+categories: tensorflow
 tags: [m1 맥북, m2 맥북, 실리콘 맥북, 텐서플로 설치, python, 파이썬, pytorch, 파이토치, data science, 데이터 분석, 딥러닝, 딥러닝 자격증, 머신러닝, 빅데이터, 테디노트]
 comments: true
 published: true

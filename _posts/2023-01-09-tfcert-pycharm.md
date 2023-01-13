@@ -3,7 +3,7 @@ layout: page
 title: "[2023년 업데이트] 구글 텐서플로 개발자 자격인증 시험을 위한 환경설치(PyCharm, 필요 라이브러리 설치)"
 description: "[2023년 업데이트] 구글 텐서플로 개발자 자격인증 시험을 위한 환경설치(PyCharm, 필요 라이브러리 설치)에 대해 알아보겠습니다."
 headline: "[2023년 업데이트] 구글 텐서플로 개발자 자격인증 시험을 위한 환경설치(PyCharm, 필요 라이브러리 설치)에 대해 알아보겠습니다."
-categories: TensorFlow
+categories: tensorflow
 tags: [python, 파이썬, tensorflow, tensorflow certificate, google tensorflow, 텐서플로 자격증, 텐서플로우 자격증, 파이참 설치, 가상환경 설정, 아나콘다 가상환경, data science, 데이터 분석, 딥러닝, 딥러닝 자격증, 머신러닝, 빅데이터, 테디노트]
 comments: true
 published: true
