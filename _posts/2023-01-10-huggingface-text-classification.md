@@ -3,12 +3,14 @@ layout: page
 title: "[huggingface] 허깅페이스 사전학습 토크나이저와 모델로 텍스트 분류(Text Classification)하기"
 description: "허깅페이스 사전학습 토크나이저와 모델로 텍스트 분류(Text Classification)에 대해 알아보겠습니다."
 headline: "허깅페이스 사전학습 토크나이저와 모델로 텍스트 분류(Text Classification)에 대해 알아보겠습니다."
-categories: pytorch
+categories: hugging face
 tags: [python, 파이썬, huggingface, 허깅페이스, 텍스트 분류, 자연어처리, 감정 분석, 자연어처리 사전학습, bert, data science, 데이터 분석, 딥러닝, 딥러닝 자격증, 머신러닝, 빅데이터, 테디노트]
 comments: true
 published: true
 typora-copy-images-to: ../images/2023-01-10
 ---
+
+
 
 요즘에 자연어 처리(특히나 트랜스포머 계열의 모델)를 공부한다면 절대적인 입지를 가지고 있는 [허깅페이스(Hugging Face)](https://huggingface.co/)를 빼놓고 얘기할 수는 없을 것입니다. 하지만, 이제 더이상 자연어 처리 도메인에 국한되지 않고 비전(Vision), 오디오(Audio) 등을 포함한 범위도 넓혀 가고 있습니다. 
 
@@ -39,7 +41,17 @@ model = AutoModelForMaskedLM.from_pretrained("bert-base-uncased")
 
 
 
-<head>
+
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		<head>
   <style>
     table.dataframe {
       white-space: normal;
@@ -54,37 +66,39 @@ model = AutoModelForMaskedLM.from_pretrained("bert-base-uncased")
       border: 0px !important;
     }
 
-    table.dataframe th {
-      text-align: center;
-      font-weight: bold;
-      padding: 8px;
-    }
-    
-    table.dataframe td {
-      text-align: center;
-      padding: 8px;
-    }
-    
-    table.dataframe tr:hover {
-      background: #b8d1f3; 
-    }
-    
-    .output_prompt {
-      overflow: auto;
-      font-size: 0.9rem;
-      line-height: 1.45;
-      border-radius: 0.3rem;
-      -webkit-overflow-scrolling: touch;
-      padding: 0.8rem;
-      margin-top: 0;
-      margin-bottom: 15px;
-      font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
-      color: $code-text-color;
-      border: solid 1px $border-color;
-      border-radius: 0.3rem;
-      word-break: normal;
-      white-space: pre;
-    }
+```
+table.dataframe th {
+  text-align: center;
+  font-weight: bold;
+  padding: 8px;
+}
+
+table.dataframe td {
+  text-align: center;
+  padding: 8px;
+}
+
+table.dataframe tr:hover {
+  background: #b8d1f3; 
+}
+
+.output_prompt {
+  overflow: auto;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  border-radius: 0.3rem;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.8rem;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  color: $code-text-color;
+  border: solid 1px $border-color;
+  border-radius: 0.3rem;
+  word-break: normal;
+  white-space: pre;
+}
+```
 
   .dataframe tbody tr th:only-of-type {
       vertical-align: middle;
@@ -109,7 +123,6 @@ model = AutoModelForMaskedLM.from_pretrained("bert-base-uncased")
 
   </style>
 </head>
-
 
 ## 데이터셋 다운로드
 
@@ -141,101 +154,134 @@ df = df.rename(columns={
 df
 ```
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		
+​
+
+```
+.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+```
+
 </style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>article_link</th>
-      <th>sentence</th>
-      <th>label</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>https://www.huffingtonpost.com/entry/versace-b...</td>
-      <td>former versace store clerk sues over secret 'b...</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>https://www.huffingtonpost.com/entry/roseanne-...</td>
-      <td>the 'roseanne' revival catches up to our thorn...</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>https://local.theonion.com/mom-starting-to-fea...</td>
-      <td>mom starting to fear son's web series closest ...</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>https://politics.theonion.com/boehner-just-wan...</td>
-      <td>boehner just wants wife to listen, not come up...</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>https://www.huffingtonpost.com/entry/jk-rowlin...</td>
-      <td>j.k. rowling wishes snape happy birthday in th...</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>26704</th>
-      <td>https://www.huffingtonpost.com/entry/american-...</td>
-      <td>american politics in moral free-fall</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>26705</th>
-      <td>https://www.huffingtonpost.com/entry/americas-...</td>
-      <td>america's best 20 hikes</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>26706</th>
-      <td>https://www.huffingtonpost.com/entry/reparatio...</td>
-      <td>reparations and obama</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>26707</th>
-      <td>https://www.huffingtonpost.com/entry/israeli-b...</td>
-      <td>israeli ban targeting boycott supporters raise...</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>26708</th>
-      <td>https://www.huffingtonpost.com/entry/gourmet-g...</td>
-      <td>gourmet gifts for the foodie 2014</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>26709 rows × 3 columns</p>
-</div>
 
+
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		
+
+
+​      
+​      article_link
+​      sentence
+​      label
+
+  
+
+
+​    
+​      0
+​      https://www.huffingtonpost.com/entry/versace-b...
+​      former versace store clerk sues over secret 'b...
+​      0
+
+
+​    
+​      1
+​      https://www.huffingtonpost.com/entry/roseanne-...
+​      the 'roseanne' revival catches up to our thorn...
+​      0
+
+
+​    
+​      2
+​      https://local.theonion.com/mom-starting-to-fea...
+​      mom starting to fear son's web series closest ...
+​      1
+
+
+​    
+​      3
+​      https://politics.theonion.com/boehner-just-wan...
+​      boehner just wants wife to listen, not come up...
+​      1
+
+
+​    
+​      4
+​      https://www.huffingtonpost.com/entry/jk-rowlin...
+​      j.k. rowling wishes snape happy birthday in th...
+​      0
+
+
+​    
+​      ...
+​      ...
+​      ...
+​      ...
+
+
+​    
+​      26704
+​      https://www.huffingtonpost.com/entry/american-...
+​      american politics in moral free-fall
+​      0
+
+
+​    
+​      26705
+​      https://www.huffingtonpost.com/entry/americas-...
+​      america's best 20 hikes
+​      0
+
+
+​    
+​      26706
+​      https://www.huffingtonpost.com/entry/reparatio...
+​      reparations and obama
+​      0
+
+
+​    
+​      26707
+​      https://www.huffingtonpost.com/entry/israeli-b...
+​      israeli ban targeting boycott supporters raise...
+​      0
+
+
+​    
+​      26708
+​      https://www.huffingtonpost.com/entry/gourmet-g...
+​      gourmet gifts for the foodie 2014
+​      0
+
+  
+
+
+26709 rows × 3 columns​
+
+</div>
 
 ## 데이터셋 분할
 
@@ -247,68 +293,95 @@ from sklearn.model_selection import train_test_split
 train, test = train_test_split(df, random_state=SEED)
 ```
 
-
 ```python
 # train 데이터셋 출력
 train.head()
 ```
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		
+​
+
+```
+.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+```
+
 </style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>article_link</th>
-      <th>sentence</th>
-      <th>label</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>7917</th>
-      <td>https://www.theonion.com/disturbance-of-arafat...</td>
-      <td>disturbance of arafat's grave casts horrible c...</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>23206</th>
-      <td>https://www.huffingtonpost.com/entry/15-photos...</td>
-      <td>15 photos of hot dudes supporting bernie sande...</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4611</th>
-      <td>https://www.huffingtonpost.com/entry/illinois-...</td>
-      <td>6 things you need to know about the nation's s...</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>11937</th>
-      <td>https://local.theonion.com/really-ugly-shark-t...</td>
-      <td>really ugly shark tired of being mistaken for ...</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>9334</th>
-      <td>https://local.theonion.com/friends-wife-encoun...</td>
-      <td>friend's wife encountered twice a year</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
+
+
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		
+
+
+​      
+​      article_link
+​      sentence
+​      label
+
+  
+
+
+​    
+​      7917
+​      https://www.theonion.com/disturbance-of-arafat...
+​      disturbance of arafat's grave casts horrible c...
+​      1
+
+
+​    
+​      23206
+​      https://www.huffingtonpost.com/entry/15-photos...
+​      15 photos of hot dudes supporting bernie sande...
+​      0
+
+
+​    
+​      4611
+​      https://www.huffingtonpost.com/entry/illinois-...
+​      6 things you need to know about the nation's s...
+​      0
+
+
+​    
+​      11937
+​      https://local.theonion.com/really-ugly-shark-t...
+​      really ugly shark tired of being mistaken for ...
+​      1
+
+
+​    
+​      9334
+​      https://local.theonion.com/friends-wife-encoun...
+​      friend's wife encountered twice a year
+​      1
+
+  
+
+
+
 </div>
 
 
@@ -318,64 +391,91 @@ train.head()
 test.head()
 ```
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		
+​
+
+```
+.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+```
+
 </style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>article_link</th>
-      <th>sentence</th>
-      <th>label</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>22288</th>
-      <td>https://www.huffingtonpost.com/entry/steve-wil...</td>
-      <td>steve wilson on 'the making of gone with the w...</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>16228</th>
-      <td>https://local.theonion.com/standards-lowered-f...</td>
-      <td>standards lowered for second search through fr...</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4905</th>
-      <td>https://www.huffingtonpost.comhttp://www.thede...</td>
-      <td>surgical tech in needle-swap scandal at swedis...</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>8947</th>
-      <td>https://www.huffingtonpost.com/entry/donald-tr...</td>
-      <td>ferguson is not among the most dangerous place...</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3706</th>
-      <td>https://politics.theonion.com/bill-clinton-res...</td>
-      <td>bill clinton resting up to sit upright at next...</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div>
 
+
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		
+
+
+​      
+​      article_link
+​      sentence
+​      label
+
+  
+
+
+​    
+​      22288
+​      https://www.huffingtonpost.com/entry/steve-wil...
+​      steve wilson on 'the making of gone with the w...
+​      0
+
+
+​    
+​      16228
+​      https://local.theonion.com/standards-lowered-f...
+​      standards lowered for second search through fr...
+​      1
+
+
+​    
+​      4905
+​      https://www.huffingtonpost.comhttp://www.thede...
+​      surgical tech in needle-swap scandal at swedis...
+​      0
+
+
+​    
+​      8947
+​      https://www.huffingtonpost.com/entry/donald-tr...
+​      ferguson is not among the most dangerous place...
+​      0
+
+
+​    
+​      3706
+​      https://politics.theonion.com/bill-clinton-res...
+​      bill clinton resting up to sit upright at next...
+​      1
+
+  
+
+
+
+</div>
 
 ## 토큰화가 적용된 데이터셋
 
@@ -445,13 +545,22 @@ device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 print(device)
 ```
 
-<pre>
-cuda:1
-</pre>
+
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		cuda:1
+
+
 
 
 `TrainingArguments` 에 학습에 적용할 몇 가지 옵션을 다음과 같이 지정합니다. 세부 옵션에 대한 내용은 주석으로 달아 놓았습니다.
-
 
 ```python
 from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
@@ -478,7 +587,6 @@ training_args = TrainingArguments(
 
 사전 학습 모델을 다운로드 받은 후 `Trainer`를 활용하여 학습을 손쉽게 진행합니다.
 
-
 ```python
 # pre-trained 모델 지정
 model_pretrained = 'distilbert-base-uncased'
@@ -498,8 +606,17 @@ trainer = Trainer(
 trainer.train()
 ```
 
-<pre>
-Saving model checkpoint to ./results/checkpoint-500
+
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		Saving model checkpoint to ./results/checkpoint-500
 Configuration saved in ./results/checkpoint-500/config.json
 Model weights saved in ./results/checkpoint-500/pytorch_model.bin
 Saving model checkpoint to ./results/checkpoint-1000
@@ -507,7 +624,7 @@ Configuration saved in ./results/checkpoint-1000/config.json
 Model weights saved in ./results/checkpoint-1000/pytorch_model.bin
 Saving model checkpoint to ./results/checkpoint-1500
 Configuration saved in ./results/checkpoint-1500/config.json
-Model weights saved in ./results/checkpoint-1500/pytorch_model.bin
+Model weights saved in ./results/checkpoint-1500/pytorch_model.bin​
 
 Training completed. Do not forget to share your model on huggingface.co/models =)
 
@@ -524,39 +641,67 @@ predictions = trainer.predict(test_data)
 predictions
 ```
 
-<pre>
-***** Running Prediction *****
+
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		***** Running Prediction *****
   Num examples = 6678
   Batch size = 128
-</pre>
+​
 
 
-<pre>
-PredictionOutput(predictions=array([[ 2.9732733, -2.9471958],
-       [-4.0222363,  3.6413522],
-       [ 3.8347576, -3.318453 ],
-       ...,
-       [ 2.824299 , -2.4794154],
-       [ 3.5981152, -3.2576218],
-       [ 4.025952 , -3.6779523]], dtype=float32), label_ids=array([0, 1, 0, ..., 0, 0, 0]), metrics={'test_loss': 0.3030776381492615, 'test_runtime': 13.6168, 'test_samples_per_second': 490.424, 'test_steps_per_second': 3.892})
-</pre>
+
+
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		PredictionOutput(predictions=array([[ 2.9732733, -2.9471958],
+​	   [-4.0222363,  3.6413522],
+​	   [ 3.8347576, -3.318453 ],
+​	   ...,
+​	   [ 2.824299 , -2.4794154],
+​	   [ 3.5981152, -3.2576218],
+​	   [ 4.025952 , -3.6779523]], dtype=float32), label_ids=array([0, 1, 0, ..., 0, 0, 0]), metrics={'test_loss': 0.3030776381492615, 'test_runtime': 13.6168, 'test_samples_per_second': 490.424, 'test_steps_per_second': 3.892})
+
+
 
 
 예측된 결과는 `label_ids` 에 담겨 있습니다.
-
 
 ```python
 # 예측 결과는 label_ids 에 담겨 있음
 predictions.label_ids
 ```
 
-<pre>
-array([0, 1, 0, ..., 0, 0, 0])
-</pre>
+
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		array([0, 1, 0, ..., 0, 0, 0])
+
+
 
 
 정확도 평가를 수행합니다. `test['label']` 값과 비교하면 정확도가 산출됩니다.
-
 
 ```python
 # 평가
@@ -564,6 +709,15 @@ accuracy = (test['label'] == predictions.label_ids).mean()
 accuracy
 ```
 
-<pre>
-1.0
-</pre>
+
+				HTML
+
+
+​					
+​				
+​				
+​						
+​				
+​			
+​		1.0
+
