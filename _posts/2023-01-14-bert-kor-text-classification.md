@@ -978,16 +978,17 @@ print(last_hidden_state.shape)
 print(last_hidden_state[:, 0, :])
 ```
 
+
 <pre>
 torch.Size([8, 512, 768])
 tensor([[-0.2648, -0.7522, -0.0201,  ...,  0.1347, -1.0979,  0.5044],
-        [-0.8496,  0.3822, -0.1804,  ...,  0.0605, -1.2255,  0.1880],
-        [ 0.1074,  0.3704, -0.4008,  ..., -0.0877, -0.9114,  0.2701],
-        ...,
-        [ 0.5518,  0.0208,  0.2635,  ...,  0.5427, -2.0081,  0.9168],
-        [ 0.8714, -0.0267,  0.2738,  ...,  0.1526, -1.0668,  0.5521],
-        [ 0.1562,  0.0058, -0.0917,  ..., -1.7647,  0.1226, -0.9639]],
-       device='cuda:1', grad_fn=<SliceBackward0>)
+[-0.8496,  0.3822, -0.1804,  ...,  0.0605, -1.2255,  0.1880],
+[ 0.1074,  0.3704, -0.4008,  ..., -0.0877, -0.9114,  0.2701],
+...,
+[ 0.5518,  0.0208,  0.2635,  ...,  0.5427, -2.0081,  0.9168],
+[ 0.8714, -0.0267,  0.2738,  ...,  0.1526, -1.0668,  0.5521],
+[ 0.1562,  0.0058, -0.0917,  ..., -1.7647,  0.1226, -0.9639]],
+device='cuda:1', grad_fn=SliceBackward0)
 </pre>
 
 
@@ -1008,8 +1009,9 @@ tensor([[-0.1134,  0.3340, -0.9995,  ...,  0.1017,  0.2376,  0.7940],
         [-0.5301,  0.6815, -0.8834,  ...,  0.1480,  0.3735,  0.5666],
         [-0.9325, -0.0130, -0.7675,  ..., -0.6921,  0.0119,  0.8636],
         [ 0.6517, -0.2224, -0.9989,  ...,  0.9627,  0.3042, -0.4665]],
-       device='cuda:1', grad_fn=<TanhBackward0>)
+       device='cuda:1', grad_fn=TanhBackward0)
 </pre>
+
 output으로 나온 `last_hidden_state[:, 0, :]`의 `[CLS]` 토큰을 가져온 뒤 FC에 입력으로 대입합니다.
 
 
@@ -1034,6 +1036,7 @@ print(fc_output.argmax(dim=1))
 torch.Size([8, 2])
 tensor([1, 0, 1, 1, 1, 1, 1, 1], device='cuda:1')
 </pre>
+
 ## 사전학습(pre-trained) BERT 모델을 활용한 텍스트 분류 모델 생성
 
 
@@ -1072,11 +1075,6 @@ bert = CustomBertModel(CHECKPOINT_NAME)
 bert.to(device)
 ```
 
-<pre>
-Some weights of the model checkpoint at kykim/bert-kor-base were not used when initializing BertModel: ['cls.predictions.decoder.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.weight', 'cls.predictions.bias', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight']
-- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-</pre>
 <pre>
 CustomBertModel(
   (bert): BertModel(
