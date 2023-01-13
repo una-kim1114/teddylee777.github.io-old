@@ -1598,3 +1598,93 @@ training loss: 0.25765, training accuracy: 0.99100: 100% 125/125 [00:20<00:00,  
 <pre>
 epoch 10, loss: 0.03221, acc: 0.99100, val_loss: 0.65872, val_accuracy: 0.86000
 </pre>
+
+
+
+## 예시 문장을 입력하여 긍/부정 예측하기
+
+먼저, 학습시 저장한 `state_dict`를 로드합니다.
+
+```python
+# 저장한 state_dict를 로드 합니다.
+bert.load_state_dict(torch.load(f'{model_name}.pth'))
+```
+
+
+
+학습된 모델을 활용하여 편하게 예측할 수 있도록 `CustomPredictor` 라는 클래스를 정의합니다.
+
+```python
+class CustomPredictor():
+    def __init__(self, model, tokenizer, labels: dict):
+        self.model = model
+        self.tokenizer = tokenizer
+        self.labels = labels
+        
+    def predict(self, sentence):
+        # 토큰화 처리
+        tokens = self.tokenizer(
+            sentence,                # 1개 문장 
+            return_tensors='pt',     # 텐서로 반환
+            truncation=True,         # 잘라내기 적용
+            padding='max_length',    # 패딩 적용
+            add_special_tokens=True  # 스페셜 토큰 적용
+        )
+        tokens.to(device)
+        prediction = self.model(**tokens)
+        prediction = F.softmax(prediction, dim=1)
+        output = prediction.argmax(dim=1).item()
+        prob, result = prediction.max(dim=1)[0].item(), self.labels[output]
+        print(f'[{result}]\n확률은: {prob*100:.3f}% 입니다.')
+```
+
+
+
+`CustomPredictor` 클래스 인스턴스를 생성합니다. 생성시 학습된 모델, 토크나이저, 라벨 등을 지정합니다.
+
+```python
+# Huggingface 토크나이저 생성
+tokenizer = BertTokenizerFast.from_pretrained(CHECKPOINT_NAME)
+
+labels = {
+    0: '부정 리뷰 입니다.', 
+    1: '긍정 리뷰 입니다.'
+}
+
+# CustomPredictor 인스턴스를 생성합니다.
+predictor = CustomPredictor(bert, tokenizer, labels)
+```
+
+
+
+간단하게 문장의 입력을 받으면 예측할 수 있는 함수를 생성하고 실행합니다.
+
+```python
+# 사용자 입력에 대하여 예측 후 출력을 낼 수 있는 간단한 함수를 생성합니다.
+def predict_sentence(predictor):
+    input_sentence = input('문장을 입력해 주세요: ')
+    predictor.predict(input_sentence)
+```
+
+```python
+# 부정 리뷰 입력 예시
+predict_sentence(predictor)
+```
+
+```
+문장을 입력해 주세요: 이 영화는 정말 더럽게 재미없네... 다신 안보련다 비추!
+[부정 리뷰 입니다.]
+확률은: 93.257% 입니다.
+```
+
+```python
+# 긍정 리뷰 입력 예시
+predict_sentence(predictor)
+```
+
+```
+문장을 입력해 주세요: 인생 최고의 영화였다. 진짜 배우들의 명연기가 돋보이는 영화
+[긍정 리뷰 입니다.]
+확률은: 99.676% 입니다.
+```
+
