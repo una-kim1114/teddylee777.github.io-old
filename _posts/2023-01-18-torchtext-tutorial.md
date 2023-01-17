@@ -541,15 +541,14 @@ tensor([5, 1, 2, 4, 1, 4, 5, 2, 2, 4, 1, 2, 5, 3, 1, 3, 4, 4, 1, 4, 3, 3, 2, 1,
 LABEL.vocab.stoi
 ```
 
-<pre>
-defaultdict(<bound method Vocab._default_unk_index of <torchtext.legacy.vocab.Vocab object at 0x7fef54074910>>,
-            {'<unk>': 0,
+```
+defaultdict({'<unk>': 0,
              'sport': 1,
              'business': 2,
              'politics': 3,
              'tech': 4,
              'entertainment': 5})
-</pre>
+```
 따라서, 0번을 무시해주기 위해서는 배치 학습시 다음과 같이 처리해 줄 수 있습니다.
 
 
