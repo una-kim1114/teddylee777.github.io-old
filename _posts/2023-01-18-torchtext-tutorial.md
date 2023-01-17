@@ -339,7 +339,7 @@ SEED = 123
 dataset = TabularDataset(path='bbc-text.csv',  # 파일의 경로
                          format='CSV',         # 형식 지정
                          fields=fields,        # 이전에 생성한 field 지정
-#                          skip_header=True    # 첫 번째 행은 컬러명이므로 skip
+                         skip_header=True    # 첫 번째 행은 컬러명이므로 skip
                         )        
 ```
 
