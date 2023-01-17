@@ -16,25 +16,11 @@ typora-copy-images-to: ../images/2023-01-18
 
 예제 코드는 아래에서 확인할 수 있습니다.
 
+**예제 코드**
+[Google Colab 예제 코드](https://colab.research.google.com/github/teddylee777/machine-learning/blob/master/02-PyTorch/16-torchtext-tutorial.ipynb)
 
 
-**[예제 코드]**
-
-[Google Colab 실습 코드](https://colab.research.google.com/github/teddylee777/machine-learning/blob/master/02-PyTorch/16-torchtext-tutorial.ipynb)
-
-
-
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		<head>
+<head>
   <style>
     table.dataframe {
       white-space: normal;
@@ -49,39 +35,37 @@ typora-copy-images-to: ../images/2023-01-18
       border: 0px !important;
     }
 
-```
-table.dataframe th {
-  text-align: center;
-  font-weight: bold;
-  padding: 8px;
-}
+    table.dataframe th {
+      text-align: center;
+      font-weight: bold;
+      padding: 8px;
+    }
 
-table.dataframe td {
-  text-align: center;
-  padding: 8px;
-}
+    table.dataframe td {
+      text-align: center;
+      padding: 8px;
+    }
 
-table.dataframe tr:hover {
-  background: #b8d1f3; 
-}
+    table.dataframe tr:hover {
+      background: #b8d1f3; 
+    }
 
-.output_prompt {
-  overflow: auto;
-  font-size: 0.9rem;
-  line-height: 1.45;
-  border-radius: 0.3rem;
-  -webkit-overflow-scrolling: touch;
-  padding: 0.8rem;
-  margin-top: 0;
-  margin-bottom: 15px;
-  font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  color: $code-text-color;
-  border: solid 1px $border-color;
-  border-radius: 0.3rem;
-  word-break: normal;
-  white-space: pre;
-}
-```
+    .output_prompt {
+      overflow: auto;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      border-radius: 0.3rem;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.8rem;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      color: $code-text-color;
+      border: solid 1px $border-color;
+      border-radius: 0.3rem;
+      word-break: normal;
+      white-space: pre;
+    }
 
   .dataframe tbody tr th:only-of-type {
       vertical-align: middle;
@@ -107,7 +91,9 @@ table.dataframe tr:hover {
   </style>
 </head>
 
+
 # torchtext 튜토리얼
+
 
 ## 샘플 데이터셋 다운로드
 
@@ -120,19 +106,9 @@ url = 'https://storage.googleapis.com/download.tensorflow.org/data/bbc-text.csv'
 urllib.request.urlretrieve(url, 'bbc-text.csv')
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		('bbc-text.csv', )
-
-
+<pre>
+('bbc-text.csv', <http.client.HTTPMessage at 0x7fef4303e940>)
+</pre>
 Pandas로 데이터 로드 및 출력
 
 
@@ -144,122 +120,89 @@ df = pd.read_csv('bbc-text.csv')
 df
 ```
 
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-				HTML
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		
-​
-
-```
-.dataframe tbody tr th {
-    vertical-align: top;
-}
-
-.dataframe thead th {
-    text-align: right;
-}
-```
-
+    .dataframe thead th {
+        text-align: right;
+    }
 </style>
-
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		
-
-
-​      
-​      category
-​      text
-
-  
-
-
-​    
-​      0
-​      tech
-​      tv future in the hands of viewers with home th...
-
-
-​    
-​      1
-​      business
-​      worldcom boss  left books alone  former worldc...
-
-
-​    
-​      2
-​      sport
-​      tigers wary of farrell  gamble  leicester say ...
-
-
-​    
-​      3
-​      sport
-​      yeading face newcastle in fa cup premiership s...
-
-
-​    
-​      4
-​      entertainment
-​      ocean s twelve raids box office ocean s twelve...
-
-
-​    
-​      ...
-​      ...
-​      ...
-
-
-​    
-​      2220
-​      business
-​      cars pull down us retail figures us retail sal...
-
-
-​    
-​      2221
-​      politics
-​      kilroy unveils immigration policy ex-chatshow ...
-
-
-​    
-​      2222
-​      entertainment
-​      rem announce new glasgow concert us band rem h...
-
-
-​    
-​      2223
-​      politics
-​      how political squabbles snowball it s become c...
-
-
-​    
-​      2224
-​      sport
-​      souness delight at euro progress boss graeme s...
-
-  
-
-
-2225 rows × 2 columns​
-
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>category</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>tech</td>
+      <td>tv future in the hands of viewers with home th...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>business</td>
+      <td>worldcom boss  left books alone  former worldc...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>sport</td>
+      <td>tigers wary of farrell  gamble  leicester say ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>sport</td>
+      <td>yeading face newcastle in fa cup premiership s...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>entertainment</td>
+      <td>ocean s twelve raids box office ocean s twelve...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2220</th>
+      <td>business</td>
+      <td>cars pull down us retail figures us retail sal...</td>
+    </tr>
+    <tr>
+      <th>2221</th>
+      <td>politics</td>
+      <td>kilroy unveils immigration policy ex-chatshow ...</td>
+    </tr>
+    <tr>
+      <th>2222</th>
+      <td>entertainment</td>
+      <td>rem announce new glasgow concert us band rem h...</td>
+    </tr>
+    <tr>
+      <th>2223</th>
+      <td>politics</td>
+      <td>how political squabbles snowball it s become c...</td>
+    </tr>
+    <tr>
+      <th>2224</th>
+      <td>sport</td>
+      <td>souness delight at euro progress boss graeme s...</td>
+    </tr>
+  </tbody>
+</table>
+<p>2225 rows × 2 columns</p>
 </div>
+
 
 ## 토크나이저 생성
 
@@ -282,19 +225,9 @@ tokenizer = get_tokenizer('basic_english', language='en')
 tokenizer("I'd like to learn torchtext")
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		['i', "'", 'd', 'like', 'to', 'learn', 'torchtext']
-
-
+<pre>
+['i', "'", 'd', 'like', 'to', 'learn', 'torchtext']
+</pre>
 토큰 타입을 지정하면 그에 맞는 tokenizer를 반환하는 함수를 생성한 뒤 원하는 타입을 지정하여 tokenizer를 생성할 수 있습니다.
 
 
@@ -313,19 +246,9 @@ tokenizer = generate_tokenizer('basic_english')
 tokenizer("I'd like to learn torchtext")
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		['i', "'", 'd', 'like', 'to', 'learn', 'torchtext']
-
-
+<pre>
+['i', "'", 'd', 'like', 'to', 'learn', 'torchtext']
+</pre>
 `toktok`을 적용한 경우
 
 
@@ -335,18 +258,9 @@ tokenizer = generate_tokenizer('toktok')
 tokenizer("I'd like to learn torchtext")
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		['I', "'", 'd', 'like', 'to', 'learn', 'torchtext']
-
+<pre>
+['I', "'", 'd', 'like', 'to', 'learn', 'torchtext']
+</pre>
 
 ```python
 from nltk.tokenize import word_tokenize
@@ -354,19 +268,9 @@ from nltk.tokenize import word_tokenize
 word_tokenize("I'd like to learn torchtext")
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		['I', "'d", 'like', 'to', 'learn', 'torchtext']
-
-
+<pre>
+['I', "'d", 'like', 'to', 'learn', 'torchtext']
+</pre>
 ## 필드(Field) 정의
 
 
@@ -378,7 +282,9 @@ from torchtext.legacy import data
 `torchtext.legacy.data.Field` 
 
 - `Field` 클래스는 `Tensor`로 변환하기 위한 지침과 함께 데이터 유형을 정의합니다. 
+
 - `Field` 객체는 `vocab` 개체를 보유합니다.
+
 - `Field` 객체는 토큰화 방법, 생성할 Tensor 종류와 같이 데이터 유형을 수치화하는 역할을 수행합니다.
 
 
@@ -397,6 +303,7 @@ LABEL = data.Field(sequential=False)
 `fields` 변수에 dictionary를 생성합니다.
 
 - `key`: 읽어 들여올 파일의 열 이름을 지정합니다.
+
 - `value`: (`문자열`, `data.Field`) 형식으로 지정합니다. 여기서 지정한 문자열이 나중에 생성된 data의 변수 이름으로 생성됩니다.
 
 
@@ -413,6 +320,7 @@ fields = {
 ```
 
 ## 데이터셋 로드 및 분할
+
 
 `TabularDataset` 클래스는 정형 데이터파일로부터 직접 데이터를 읽을 때 유용합니다.
 
@@ -447,24 +355,15 @@ train_data, test_data = dataset.split(split_ratio=0.8,               # 분할 �
                                      )
 ```
 
+
 ```python
 # 생성된 train / test 데이터셋의 크기를 출력 합니다.
 len(train_data), len(test_data)
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		(1781, 444)
-
-
+<pre>
+(1781, 444)
+</pre>
 ## 단어 사전 생성
 
 
@@ -478,39 +377,22 @@ TEXT.build_vocab(train_data,
 LABEL.build_vocab(train_data)
 ```
 
+
 ```python
 NUM_VOCABS = len(TEXT.vocab.stoi)
 NUM_VOCABS
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		1002
-
+<pre>
+1002
+</pre>
 
 ```python
 TEXT.vocab.freqs.most_common(10)
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		[('the', 41674),
+<pre>
+[('the', 41674),
  ('to', 19644),
  ('of', 15674),
  ('and', 14621),
@@ -520,8 +402,7 @@ TEXT.vocab.freqs.most_common(10)
  ('for', 7054),
  ('is', 6535),
  ('that', 6329)]
-​
-
+</pre>
 `TEXT.vocab.stoi`는 문자열을 index로, `TEXT.vocab.itos`는 index를 문자열로 변환합니다.
 
 
@@ -531,27 +412,20 @@ TEXT.vocab.stoi
 ```
 
 ```
-{'': 0,
-'': 1,
-'the': 2,
-'to': 3,
-'of': 4,
-'and': 5,
-'a': 6,
-'in': 7,
-'s': 8,
-'for': 9,
-'is': 10,
-...
-'dems': 995,
-'laws': 996,
-'rival': 997,
-'story': 998,
-'watch': 999,
-...}
+defaultdict({'<unk>': 0,
+             '<pad>': 1,
+             'the': 2,
+             'to': 3,
+             'of': 4,
+             'and': 5,
+             ...
+             'dems': 995,
+             'laws': 996,
+             'rival': 997,
+             'story': 998,
+             'watch': 999,
+             ...})
 ```
-
-
 
 ```python
 # string to index
@@ -567,24 +441,15 @@ print(TEXT.vocab.itos[194])
 print(TEXT.vocab.itos[237])
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		37
+```
+37
 0
 849
 ==============================
 was
 end
 record
-​
+```
 
 ## 버킷 이터레이터 생성
 
@@ -627,53 +492,25 @@ sample_data = next(iter(train_iterator))
 sample_data.text.shape
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		torch.Size([32, 120])
-
+<pre>
+torch.Size([32, 120])
+</pre>
 
 ```python
 len(sample_data.text)
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		32
-
+<pre>
+32
+</pre>
 
 ```python
 sample_data.label.size(0)
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		32
-
-
+<pre>
+32
+</pre>
 `label` 의 shape 를 확인합니다.
 
 
@@ -683,38 +520,19 @@ sample_data.label.size(0)
 sample_data.label.shape
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		torch.Size([32])
-
+<pre>
+torch.Size([32])
+</pre>
 
 ```python
 # label을 출력합니다.
 sample_data.label
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		tensor([5, 1, 2, 4, 1, 4, 5, 2, 2, 4, 1, 2, 5, 3, 1, 3, 4, 4, 1, 4, 3, 3, 2, 1,
-​	    3, 5, 2, 4, 1, 5, 3, 5], device='cuda:1')
-
-
+<pre>
+tensor([5, 1, 2, 4, 1, 4, 5, 2, 2, 4, 1, 2, 5, 3, 1, 3, 4, 4, 1, 4, 3, 3, 2, 1,
+        3, 5, 2, 4, 1, 5, 3, 5], device='cuda:1')
+</pre>
 아래에서 확인할 수 있듯이 `<unk>` 토큰 때문에 카테고리의 개수가 5개임에도 불구하고 index는 0번부터 5번까지 맵핑되어 있습니다.
 
 
@@ -723,25 +541,15 @@ sample_data.label
 LABEL.vocab.stoi
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		defaultdict(>,
-​	        {'': 0,
-​	         'sport': 1,
-​	         'business': 2,
-​	         'politics': 3,
-​	         'tech': 4,
-​	         'entertainment': 5})
-
-
+<pre>
+defaultdict(<bound method Vocab._default_unk_index of <torchtext.legacy.vocab.Vocab object at 0x7fef54074910>>,
+            {'<unk>': 0,
+             'sport': 1,
+             'business': 2,
+             'politics': 3,
+             'tech': 4,
+             'entertainment': 5})
+</pre>
 따라서, 0번을 무시해주기 위해서는 배치 학습시 다음과 같이 처리해 줄 수 있습니다.
 
 
@@ -754,20 +562,10 @@ LABEL.vocab.stoi
 sample_data.label.sub_(1)
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		tensor([4, 0, 1, 3, 0, 3, 4, 1, 1, 3, 0, 1, 4, 2, 0, 2, 3, 3, 0, 3, 2, 2, 1, 0,
-​	    2, 4, 1, 3, 0, 4, 2, 4], device='cuda:1')
-
-
+<pre>
+tensor([4, 0, 1, 3, 0, 3, 4, 1, 1, 3, 0, 1, 4, 2, 0, 2, 3, 3, 0, 3, 2, 2, 1, 0,
+        2, 4, 1, 3, 0, 4, 2, 4], device='cuda:1')
+</pre>
 ## 데이터프레임(DataFrame) 커스텀 데이터셋 클래스
 
 
@@ -790,121 +588,87 @@ df = df.rename(columns={'category': 'label'})
 df
 ```
 
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-				HTML
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		
-​
-
-```
-.dataframe tbody tr th {
-    vertical-align: top;
-}
-
-.dataframe thead th {
-    text-align: right;
-}
-```
-
+    .dataframe thead th {
+        text-align: right;
+    }
 </style>
-
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		
-
-
-​      
-​      label
-​      text
-
-  
-
-
-​    
-​      0
-​      tech
-​      tv future in the hands of viewers with home th...
-
-
-​    
-​      1
-​      business
-​      worldcom boss  left books alone  former worldc...
-
-
-​    
-​      2
-​      sport
-​      tigers wary of farrell  gamble  leicester say ...
-
-
-​    
-​      3
-​      sport
-​      yeading face newcastle in fa cup premiership s...
-
-
-​    
-​      4
-​      entertainment
-​      ocean s twelve raids box office ocean s twelve...
-
-
-​    
-​      ...
-​      ...
-​      ...
-
-
-​    
-​      2220
-​      business
-​      cars pull down us retail figures us retail sal...
-
-
-​    
-​      2221
-​      politics
-​      kilroy unveils immigration policy ex-chatshow ...
-
-
-​    
-​      2222
-​      entertainment
-​      rem announce new glasgow concert us band rem h...
-
-
-​    
-​      2223
-​      politics
-​      how political squabbles snowball it s become c...
-
-
-​    
-​      2224
-​      sport
-​      souness delight at euro progress boss graeme s...
-
-  
-
-
-2225 rows × 2 columns​
-
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>tech</td>
+      <td>tv future in the hands of viewers with home th...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>business</td>
+      <td>worldcom boss  left books alone  former worldc...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>sport</td>
+      <td>tigers wary of farrell  gamble  leicester say ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>sport</td>
+      <td>yeading face newcastle in fa cup premiership s...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>entertainment</td>
+      <td>ocean s twelve raids box office ocean s twelve...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2220</th>
+      <td>business</td>
+      <td>cars pull down us retail figures us retail sal...</td>
+    </tr>
+    <tr>
+      <th>2221</th>
+      <td>politics</td>
+      <td>kilroy unveils immigration policy ex-chatshow ...</td>
+    </tr>
+    <tr>
+      <th>2222</th>
+      <td>entertainment</td>
+      <td>rem announce new glasgow concert us band rem h...</td>
+    </tr>
+    <tr>
+      <th>2223</th>
+      <td>politics</td>
+      <td>how political squabbles snowball it s become c...</td>
+    </tr>
+    <tr>
+      <th>2224</th>
+      <td>sport</td>
+      <td>souness delight at euro progress boss graeme s...</td>
+    </tr>
+  </tbody>
+</table>
+<p>2225 rows × 2 columns</p>
 </div>
 
 
@@ -914,89 +678,62 @@ df
 train_df, val_df = train_test_split(df, test_size=0.2, random_state=SEED)
 ```
 
+
 ```python
 # train DataFrame
 train_df.head()
 ```
 
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-				HTML
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		
-​
-
-```
-.dataframe tbody tr th {
-    vertical-align: top;
-}
-
-.dataframe thead th {
-    text-align: right;
-}
-```
-
+    .dataframe thead th {
+        text-align: right;
+    }
 </style>
-
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		
-
-
-​      
-​      label
-​      text
-
-  
-
-
-​    
-​      1983
-​      sport
-​      officials respond in court row australian tenn...
-
-
-​    
-​      878
-​      tech
-​      slow start to speedy net services faster broad...
-
-
-​    
-​      94
-​      politics
-​      amnesty chief laments war failure the lack of ...
-
-
-​    
-​      1808
-​      sport
-​      dal maso in to replace bergamasco david dal ma...
-
-
-​    
-​      1742
-​      tech
-​      technology gets the creative bug the hi-tech a...
-
-  
-
-
-
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1983</th>
+      <td>sport</td>
+      <td>officials respond in court row australian tenn...</td>
+    </tr>
+    <tr>
+      <th>878</th>
+      <td>tech</td>
+      <td>slow start to speedy net services faster broad...</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>politics</td>
+      <td>amnesty chief laments war failure the lack of ...</td>
+    </tr>
+    <tr>
+      <th>1808</th>
+      <td>sport</td>
+      <td>dal maso in to replace bergamasco david dal ma...</td>
+    </tr>
+    <tr>
+      <th>1742</th>
+      <td>tech</td>
+      <td>technology gets the creative bug the hi-tech a...</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 
 
@@ -1006,84 +743,56 @@ train_df.head()
 val_df.head()
 ```
 
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-				HTML
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		
-​
-
-```
-.dataframe tbody tr th {
-    vertical-align: top;
-}
-
-.dataframe thead th {
-    text-align: right;
-}
-```
-
+    .dataframe thead th {
+        text-align: right;
+    }
 </style>
-
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		
-
-
-​      
-​      label
-​      text
-
-  
-
-
-​    
-​      717
-​      politics
-​      child access laws shake-up parents who refuse ...
-
-
-​    
-​      798
-​      entertainment
-​      fry set for role in hitchhiker s actor stephen...
-
-
-​    
-​      1330
-​      business
-​      palestinian economy in decline despite a short...
-
-
-​    
-​      18
-​      business
-​      japanese banking battle at an end japan s sumi...
-
-
-​    
-​      1391
-​      business
-​      manufacturing recovery  slowing  uk manufactur...
-
-  
-
-
-
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>717</th>
+      <td>politics</td>
+      <td>child access laws shake-up parents who refuse ...</td>
+    </tr>
+    <tr>
+      <th>798</th>
+      <td>entertainment</td>
+      <td>fry set for role in hitchhiker s actor stephen...</td>
+    </tr>
+    <tr>
+      <th>1330</th>
+      <td>business</td>
+      <td>palestinian economy in decline despite a short...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>business</td>
+      <td>japanese banking battle at an end japan s sumi...</td>
+    </tr>
+    <tr>
+      <th>1391</th>
+      <td>business</td>
+      <td>manufacturing recovery  slowing  uk manufactur...</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 
 
@@ -1099,19 +808,9 @@ device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 print(device)
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		cuda:1
-
-
+<pre>
+cuda:1
+</pre>
 `torchtext.legacy.data.Dataset`을 상속하여 데이터프레임을 로드할 수 있습니다.
 
 
@@ -1148,6 +847,7 @@ class DataFrameDataset(data.Dataset):
         return tuple(d for d in (train_data, val_data, test_data) if d is not None)
 ```
 
+
 ```python
 # 토크나이저 정의 (다른 토크나이저로 대체 가능)
 tokenizer = get_tokenizer('basic_english')
@@ -1171,10 +871,12 @@ LABEL = data.Field(sequential=False)
 fields = [('text', TEXT), ('label', LABEL)]
 ```
 
+
 ```python
 # DataFrame의 Splits로 데이터셋 분할
 train_ds, val_ds = DataFrameDataset.splits(fields, train_df=train_df, val_df=val_df)
 ```
+
 
 ```python
 # 단어 사전 생성
@@ -1186,6 +888,7 @@ TEXT.build_vocab(train_ds,
 LABEL.build_vocab(train_ds)
 ```
 
+
 ```python
 # 단어 사전 개수 출력
 NUM_VOCABS = len(TEXT.vocab)
@@ -1193,19 +896,9 @@ NUM_VOCABS
 # 개수 1000 + <unk> + <pad> : 총 1002개
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		1002
-
-
+<pre>
+1002
+</pre>
 `BucketIterator`를 생성합니다.
 
 
@@ -1220,43 +913,28 @@ train_iterator, test_iterator = data.BucketIterator.splits(
     device=device)
 ```
 
+
 ```python
 # 1개 배치 추출
 sample_data = next(iter(train_iterator))
 ```
+
 
 ```python
 # text shape 출력 (batch_size, sequence_length)
 sample_data.text.shape
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		torch.Size([32, 120])
-
+<pre>
+torch.Size([32, 120])
+</pre>
 
 ```python
 # label 출력 (batch)
 sample_data.label
 ```
 
-
-				HTML
-
-
-​					
-​				
-​				
-​						
-​				
-​			
-​		tensor([1, 2, 4, 4, 3, 4, 5, 4, 5, 1, 2, 1, 2, 2, 5, 5, 2, 5, 5, 2, 5, 1, 1, 2,
-​	    5, 5, 1, 3, 2, 3, 3, 5], device='cuda:1')
+<pre>
+tensor([1, 2, 4, 4, 3, 4, 5, 4, 5, 1, 2, 1, 2, 2, 5, 5, 2, 5, 5, 2, 5, 1, 1, 2,
+        5, 5, 1, 3, 2, 3, 3, 5], device='cuda:1')
+</pre>
